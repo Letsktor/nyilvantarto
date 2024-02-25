@@ -1,26 +1,24 @@
 package hu.undieb.nyilvantarto;
 
-import static android.content.ContentValues.TAG;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.nfc.NdefMessage;
+
 import android.nfc.NfcAdapter;
-import android.nfc.NfcManager;
+
 import android.nfc.Tag;
+
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
-import android.util.StringBuilderPrinter;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+
+
 
 public class MainActivity extends AppCompatActivity {
     public TextView text;
@@ -62,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     sb.append(String.format("%02X",b)+":");
                 }
-
 
             }
             text.setText(sb.toString());
