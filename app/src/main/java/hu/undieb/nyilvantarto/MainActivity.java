@@ -8,16 +8,19 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import android.nfc.FormatException;
+import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 
 import android.nfc.Tag;
 
+import android.nfc.tech.Ndef;
 import android.os.Bundle;
 
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
             text.setText(sb.toString());
         }
-
+       
 
     }
     void ReadModeOn()
