@@ -2,6 +2,7 @@ package hu.undieb.nyilvantarto;
 
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.PendingIntent;
@@ -14,7 +15,9 @@ import android.nfc.Tag;
 
 import android.os.Bundle;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
     TextView txtBArCOdeValue;
     Tag tag;
     int xd=0;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        button=findViewById(R.id.proba);
         txtBArCOdeValue=findViewById(R.id.txtFromQrCode);
         QrCodeScanner=findViewById(R.id.btnQrCodeScanner);
         nfcAdapter=NfcAdapter.getDefaultAdapter(this);
@@ -57,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
                         Barcode.FORMAT_AZTEC)
                 .build();
         GmsBarcodeScanner scanner = GmsBarcodeScanning.getClient(this);
+        button.setOnClickListener(v->{
+            showDialog();
+        });
         QrCodeScanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +126,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ReadModeOn();
+    }
+    private void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.pop_up_statisztika_layout, null);
+        // Set your custom message here
+
+        builder.setView(view);
+        builder.setPositiveButton("OK", null); // Add positive button if needed
+        builder.setNegativeButton("Cancel", null); // Add negative button if needed
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     
 }
