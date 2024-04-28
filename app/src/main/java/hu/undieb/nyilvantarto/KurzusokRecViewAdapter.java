@@ -38,6 +38,8 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
         holder.parent.setOnClickListener(v->{
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             View view = LayoutInflater.from(holder.parent.getContext()).inflate(R.layout.pop_up_statisztika_layout, null);
+            TextView txtView=view.findViewById(R.id.txtView);
+            txtView.setText(kurzusok.get(position).getKurzusNev());
             builder.setView(view);
             AlertDialog dialog = builder.create();
             dialog.show();
