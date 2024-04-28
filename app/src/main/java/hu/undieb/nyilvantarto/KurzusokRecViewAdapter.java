@@ -1,6 +1,7 @@
 package hu.undieb.nyilvantarto;
 
 import static androidx.core.content.ContextCompat.getSystemService;
+import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,10 +40,24 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             View view = LayoutInflater.from(holder.parent.getContext()).inflate(R.layout.pop_up_statisztika_layout, null);
             TextView txtView=view.findViewById(R.id.txtView);
+            ImageView imgStatisztika=view.findViewById(R.id.imgStatisztikaView);
+            ImageView imgHallgatok=view.findViewById(R.id.imgHallgatokView);
             txtView.setText(kurzusok.get(position).getKurzusNev());
             builder.setView(view);
             AlertDialog dialog = builder.create();
-            dialog.show();
+
+            imgStatisztika.setOnClickListener(vo->{
+                Intent intent=new Intent(context,StatisztikaActivity.class);
+                context.startActivity(intent);
+                dialog.dismiss();
+            });
+            imgHallgatok.setOnClickListener(vi->{
+                Intent intent=new Intent(context,HallgatokActivity.class);
+                context.startActivity(intent);
+                dialog.dismiss();
+            });
+
+
             dialog.show();
         });
     }

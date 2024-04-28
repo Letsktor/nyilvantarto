@@ -28,9 +28,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".KurzusokActivity">
+        <activity android:name=".KurzusokActivity"/>
 
-        </activity>
+        <activity android:name=".HallgatokActivity"/>
+        <activity android:name=".StatisztikaActivity"/>
     </application>
 
 </manifest>
