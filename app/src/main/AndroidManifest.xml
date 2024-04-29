@@ -32,6 +32,7 @@
 
         <activity android:name=".HallgatokActivity"/>
         <activity android:name=".StatisztikaActivity"/>
+        <activity android:name=".JelenletActivity"/>
     </application>
 
 </manifest>

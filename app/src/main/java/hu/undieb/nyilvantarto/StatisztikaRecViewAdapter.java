@@ -1,0 +1,55 @@
+package hu.undieb.nyilvantarto;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+
+public class StatisztikaRecViewAdapter  extends RecyclerView.Adapter<StatisztikaRecViewAdapter.ViewHolder> {
+    private List<Ora> orak;
+    Context mContext;
+    public StatisztikaRecViewAdapter(List<Ora> orak, Context mContext) {
+        this.orak = orak;
+        this.mContext=mContext;
+    }
+
+    @NonNull
+    @Override
+    public StatisztikaRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_statisztika,parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull StatisztikaRecViewAdapter.ViewHolder holder, int position) {
+        holder.txtDatumView.setText(orak.get(position).getDate());
+        holder.txtJelenlevok.setText(String.valueOf(orak.get(position).getJelenlevok()));
+        holder.parent.setOnClickListener(v->{
+            Intent intent=new Intent(mContext, JelenletActivity.class);
+            mContext.startActivity(intent);
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return orak.size();
+    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView txtDatumView,txtJelenlevok;
+        CardView parent;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            txtDatumView=itemView.findViewById(R.id.txtHallgato);
+            txtJelenlevok=itemView.findViewById(R.id.txtNumberView);
+            parent=itemView.findViewById(R.id.parentCardView);
+
+        }
+    }
+}

@@ -17,9 +17,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecViewAdapter.ViewHolder> {
-    private ArrayList<Kurzus> kurzusok=new ArrayList<>();
+    private List<Kurzus> kurzusok;
     private Context context;
 
     public KurzusokRecViewAdapter(Context context) {
