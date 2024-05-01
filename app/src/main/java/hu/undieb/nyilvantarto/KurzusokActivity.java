@@ -16,7 +16,7 @@ public class KurzusokActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.kurzusok);
+        setContentView(R.layout.activity_kurzusok);
         kurzusokRecView=findViewById(R.id.kurzusRecView);
         adapter=new KurzusokRecViewAdapter(this);
         kurzusokRecView.setAdapter(adapter);
