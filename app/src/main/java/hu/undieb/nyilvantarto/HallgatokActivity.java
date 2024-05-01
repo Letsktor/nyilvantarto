@@ -18,7 +18,7 @@ public class HallgatokActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hallgatok);
         recyclerView=findViewById(R.id.recViewHallgato);
-        hallgatok.add(new Hallgato("Mate","123123213-32132131","o923993219"));
+        hallgatok.add(new Hallgato("Mate","",""));
         recyclerView.setAdapter(new HallgatokRecViewAdapter(hallgatok));
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
     }

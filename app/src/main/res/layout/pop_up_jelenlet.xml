@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/bottom_stroke"
+        android:text="MInta Eszter"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="51dp"
         android:layout_height="47dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button7"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintTop_toTopOf="@+id/button7"
         app:srcCompat="@drawable/baseline_qr_code_scanner_24" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:layout_weight="0"
         android:background="@drawable/button"
         android:elevation="10dp"
-        android:text="Kártya rögzítése!"
-        android:textColor="@color/white" />
+        android:text="Jelenlet rögzítése!"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="85dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="75dp"
+        android:layout_width="63dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="4dp"
+
         android:layout_weight="1"
         android:text="NFC"
         android:textAlignment="center"
-
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button7"
+        app:layout_constraintStart_toEndOf="@+id/button7"
+        app:layout_constraintTop_toTopOf="@+id/button7"
+        app:layout_constraintVertical_bias="0.444" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
