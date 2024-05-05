@@ -3,12 +3,14 @@ package hu.undieb.nyilvantarto;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -28,7 +30,21 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
 
     @Override
     public void onBindViewHolder(@NonNull HallgatokRecViewAdapter.ViewHolder holder, int position) {
+        boolean longclick_check;
         holder.txtView.setText(hallgatok.get(position).getName());
+        holder.parent.setOnLongClickListener(v->{
+            holder.con.setVisibility(View.VISIBLE);
+            holder.edit.setOnClickListener(v1->{
+                hallgatok.get(position).setCardId("");
+                hallgatok.get(position).setCardNumber("");
+                hallgatok.get(position).setName("");
+            });
+            holder.delete.setOnClickListener(v2->{
+                hallgatok.remove(position);
+                holder.con.setVisibility(View.GONE);
+            });
+          return true;
+        });
         if(!hallgatok.get(position).getCardId().equals("") && !hallgatok.get(position).getCardNumber().equals(""))
         {
 
@@ -71,12 +87,17 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
         TextView txtView;
         ImageView card,check;
         CardView parent;
+        ConstraintLayout con;
+        Button edit, delete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            parent=itemView.findViewById(R.id.parentCardView);
             txtView=itemView.findViewById(R.id.txtHallgato);
             card=itemView.findViewById(R.id.imgCardView);
-            parent=itemView.findViewById(R.id.parentCardView);
             check=itemView.findViewById(R.id.imgCheck);
+            con=itemView.findViewById(R.id.constLayHidden);
+            edit=itemView.findViewById(R.id.btnEdit);
+            delete=itemView.findViewById(R.id.btnDelete);
         }
     }
 }
