@@ -22,9 +22,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class ChooserActivity extends AppCompatActivity {
     private Button Btnlogin,Btnregister;
     private FirebaseAuth mAuth;
-    private String email;
-    private String password;
-    private EditText edtEmail,edtPassword;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,58 +29,18 @@ public class ChooserActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Btnlogin=findViewById(R.id.loginBtn);
         Btnregister=findViewById(R.id.registerBtn);
-        edtEmail=findViewById(R.id.edtTxtEmail);
-        edtPassword=findViewById(R.id.edtTxtPassword);
-
-
         Btnlogin.setOnClickListener(v->{
-            email=edtEmail.getText().toString().trim();
-            password=edtPassword.getText().toString().trim();
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+            Intent intent=new Intent(ChooserActivity.this, Login.class);
+            startActivity(intent);
 
-                                Log.d(TAG, "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent=new Intent(ChooserActivity.this, KurzusokActivity.class);
-                                startActivity(intent);
-                            } else {
-
-                                Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(ChooserActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
         });
         Btnregister.setOnClickListener(v->{
             Intent intent=new Intent(ChooserActivity.this, Register.class);
             startActivity(intent);
-            email=edtEmail.getText().toString().trim();
-            password=edtPassword.getText().toString().trim();
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                            } else {
-
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(ChooserActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
 
         });
-
     }
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
 
@@ -92,5 +49,5 @@ public class ChooserActivity extends AppCompatActivity {
             Intent intent=new Intent(ChooserActivity.this, KurzusokActivity.class);
             startActivity(intent);
         }
-    }
+    }*/
 }
