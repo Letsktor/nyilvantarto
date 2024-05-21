@@ -2,12 +2,22 @@ package hu.undieb.nyilvantarto;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Ora {
     private String date;
     private int jelenlevok;
+    private List<Hallgato> hallgatok;
 
-    public Ora(String date,int jelenlevok) {
+    public List<Hallgato> getHallgatok() {
+        return hallgatok;
+    }
+
+    public void setHallgatok(List<Hallgato> hallgatok) {
+        this.hallgatok = hallgatok;
+    }
+
+    public Ora(String date, int jelenlevok) {
         this.date = date;
         this.jelenlevok=jelenlevok;
     }
