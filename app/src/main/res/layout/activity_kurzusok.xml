@@ -36,7 +36,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnAdd"
         android:layout_width="67dp"
         android:layout_height="67dp"
         android:layout_marginEnd="16dp"

@@ -5,8 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public interface KurzusDAO {
     DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
-    static void writeNewKurzus(String userId, String name) {
-        Kurzus kurzus = new Kurzus(name);
+   default void writeNewKurzus(String userId,Kurzus kurzus) {
         mDatabase.child("Kurzusok").child(userId).setValue(kurzus);
     }
 
