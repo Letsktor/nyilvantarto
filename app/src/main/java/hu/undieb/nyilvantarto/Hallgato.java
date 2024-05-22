@@ -1,5 +1,8 @@
 package hu.undieb.nyilvantarto;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Hallgato {
     private String name;
     private String cardNumber;

@@ -14,7 +14,12 @@ public class KurzusokActivity extends AppCompatActivity {
     private RecyclerView kurzusokRecView;
     private KurzusokRecViewAdapter adapter;
     private ArrayList<Kurzus> kurzusok=new ArrayList<>();
-    //private KurzusDAO kurzusDAO;
+    private KurzusDAO kurzusDAO=new KurzusDAO() {
+        @Override
+        public void writeNewKurzus(String userId, Kurzus kurzus) {
+            KurzusDAO.super.writeNewKurzus(userId, kurzus);
+        }
+    };
     private Button btnAdd;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +31,7 @@ public class KurzusokActivity extends AppCompatActivity {
         kurzusokRecView.setAdapter(adapter);
         kurzusokRecView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd.setOnClickListener(v->{
-            //kurzusDAO.writeNewKurzus("dasdasdas",new Kurzus("Prog 1"));
+            kurzusDAO.writeNewKurzus("dasdasdas",new Kurzus("Prog 1"));
         });
         //kurzusDAO.writeNewKurzus("dasdasdas",new Kurzus("Prog 1"));
         kurzusok.add(0, new Kurzus("Prog 1"));

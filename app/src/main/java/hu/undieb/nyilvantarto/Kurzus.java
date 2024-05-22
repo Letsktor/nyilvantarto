@@ -1,8 +1,10 @@
 package hu.undieb.nyilvantarto;
 
 
-import java.util.List;
+import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.List;
+@IgnoreExtraProperties
 public class Kurzus {
     public String getKurzusNev() {
         return kurzusNev;

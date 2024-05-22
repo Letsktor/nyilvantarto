@@ -39,15 +39,17 @@ public class ChooserActivity extends AppCompatActivity {
             startActivity(intent);
 
         });
+
     }
-    /*@Override
+    @Override
     public void onStart() {
         super.onStart();
-
+        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent=new Intent(ChooserActivity.this, KurzusokActivity.class);
             startActivity(intent);
         }
-    }*/
+    }
+
 }

@@ -1,9 +1,11 @@
 package hu.undieb.nyilvantarto;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
+@IgnoreExtraProperties
 public class Ora {
     private String date;
     private int jelenlevok;
