@@ -1,6 +1,10 @@
 package hu.undieb.nyilvantarto;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,13 +15,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class KurzusokDAO {
-    private static KurzusokDAO instance;
-    private ArrayList<Kurzus> kurzusok;
+    private static volatile KurzusokDAO instance;
+    private LiveData<ArrayList<Kurzus>> kurzusok;
     private DatabaseReference database= FirebaseDatabase.getInstance().getReference("Kurzusok");
     private KurzusokDAO(){
         if (null==kurzusok)
         {
-            kurzusok=new ArrayList<>();
+            kurzusok=new MutableLiveData<>();
             initData();
         }
     }
@@ -26,10 +30,12 @@ public class KurzusokDAO {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Kurzus> temp=new ArrayList<>();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Kurzus kurzus=dataSnapshot.getValue(Kurzus.class);
-                    kurzusok.add(kurzus);
+                    Kurzus kurzus=dataSnapshot.getValue((Kurzus.class));
+                    temp.add(kurzus);
                 }
+                ((MutableLiveData<ArrayList<Kurzus>>)kurzusok).setValue(temp);
             }
 
             @Override
@@ -39,19 +45,16 @@ public class KurzusokDAO {
         });
     }
     public static KurzusokDAO getInstance(){
-        if(null!=instance){
-            return instance;
+        if (null == instance) {
+            instance = new KurzusokDAO();
         }
-        else{
-            instance=new KurzusokDAO();
-            return instance;
-        }
+        return instance;
     }
-    public ArrayList<Kurzus> getKurzusok(){
+    public LiveData<ArrayList<Kurzus>> getKurzusok(){
         return kurzusok;
     }
     public void addKurzus(Kurzus kurzus){
-       database.child("Kurzus").setValue(kurzus);
+       database.child(kurzus.getKurzusNev()).setValue(kurzus);
     }
 
 

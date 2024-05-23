@@ -53,5 +53,4 @@ public class ChooserActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 }

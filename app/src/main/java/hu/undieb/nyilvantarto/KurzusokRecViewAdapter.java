@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecViewAdapter.ViewHolder> {
-    private List<Kurzus> kurzusok;
+    private List<Kurzus> kurzusok=new ArrayList<>();
     private Context context;
 
     public KurzusokRecViewAdapter(Context context) {
