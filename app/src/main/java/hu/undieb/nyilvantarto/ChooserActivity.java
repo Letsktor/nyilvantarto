@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ChooserActivity extends AppCompatActivity {
     private Button Btnlogin,Btnregister;
@@ -27,6 +29,7 @@ public class ChooserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooser);
         mAuth = FirebaseAuth.getInstance();
+
         Btnlogin=findViewById(R.id.loginBtn);
         Btnregister=findViewById(R.id.registerBtn);
         Btnlogin.setOnClickListener(v->{
@@ -44,7 +47,6 @@ public class ChooserActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent=new Intent(ChooserActivity.this, KurzusokActivity.class);

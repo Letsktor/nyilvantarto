@@ -39,4 +39,7 @@ public class Kurzus {
     public Kurzus(String kurzusNev) {
         this.kurzusNev = kurzusNev;
     }
+    public Kurzus()
+    {
+    }
 }

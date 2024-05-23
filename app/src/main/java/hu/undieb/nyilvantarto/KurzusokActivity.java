@@ -8,18 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class KurzusokActivity extends AppCompatActivity {
     private RecyclerView kurzusokRecView;
     private KurzusokRecViewAdapter adapter;
-    private ArrayList<Kurzus> kurzusok=new ArrayList<>();
-    private KurzusDAO kurzusDAO=new KurzusDAO() {
-        @Override
-        public void writeNewKurzus(String userId, Kurzus kurzus) {
-            KurzusDAO.super.writeNewKurzus(userId, kurzus);
-        }
-    };
+
+
     private Button btnAdd;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,12 +29,10 @@ public class KurzusokActivity extends AppCompatActivity {
         kurzusokRecView.setAdapter(adapter);
         kurzusokRecView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd.setOnClickListener(v->{
-            kurzusDAO.writeNewKurzus("dasdasdas",new Kurzus("Prog 1"));
+            KurzusokDAO.getInstance().addKurzus(new Kurzus("Prog 1"));
         });
-        //kurzusDAO.writeNewKurzus("dasdasdas",new Kurzus("Prog 1"));
-        kurzusok.add(0, new Kurzus("Prog 1"));
 
-        adapter.setKurzusok(kurzusok);
+        adapter.setKurzusok(KurzusokDAO.getInstance().getKurzusok());
     }
 
 }
