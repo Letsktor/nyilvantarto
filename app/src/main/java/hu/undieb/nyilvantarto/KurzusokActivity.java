@@ -36,8 +36,7 @@ public class KurzusokActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(v->{
             KurzusokDAO.getInstance().addKurzus(new Kurzus("Prog 1"));
         });
-        adapter.setKurzusok(kurzusok);
-        KurzusokDAO.getInstance().getKurzusok().observe(this,Kurzusok->kurzusokRecView.setAdapter(new KurzusokRecViewAdapter(Kurzusok)));
+        KurzusokDAO.getInstance().getKurzusok().observe(this,Kurzusok->kurzusokRecView.setAdapter(new KurzusokRecViewAdapter(Kurzusok,this)));
 
     }
 
