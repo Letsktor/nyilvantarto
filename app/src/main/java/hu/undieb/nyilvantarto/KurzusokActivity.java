@@ -27,17 +27,17 @@ public class KurzusokActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kurzusok);
-        KurzusokDAO.getInstance().getKurzusok().observe(this,Kurzusok->kurzusok=Kurzusok);
+
         kurzusokRecView=findViewById(R.id.kurzusRecView);
         btnAdd=findViewById(R.id.btnAdd);
-        adapter=new KurzusokRecViewAdapter(this);
+        adapter=new KurzusokRecViewAdapter(kurzusok,this);
         kurzusokRecView.setAdapter(adapter);
         kurzusokRecView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd.setOnClickListener(v->{
             KurzusokDAO.getInstance().addKurzus(new Kurzus("Prog 1"));
         });
         adapter.setKurzusok(kurzusok);
-
+        KurzusokDAO.getInstance().getKurzusok().observe(this,Kurzusok->kurzusokRecView.setAdapter(new KurzusokRecViewAdapter(Kurzusok)));
 
     }
 
