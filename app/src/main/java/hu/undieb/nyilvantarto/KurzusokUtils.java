@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KurzusokUtils {
     private static volatile KurzusokUtils instance;
@@ -54,6 +55,10 @@ public class KurzusokUtils {
     }
     public void addKurzus(Kurzus kurzus){
        database.child(kurzus.getKurzusNev()).setValue(kurzus);
+    }
+    public ArrayList<Hallgato> getHallgatok(Ora ora){
+
+        return ora.getHallgatok();
     }
 
 

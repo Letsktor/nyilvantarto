@@ -2,20 +2,19 @@ package hu.undieb.nyilvantarto;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 @IgnoreExtraProperties
 public class Ora {
     private String date;
     private int jelenlevok;
-    private List<Hallgato> hallgatok;
+    private ArrayList<Hallgato> hallgatok=new ArrayList<>();
 
-    public List<Hallgato> getHallgatok() {
+    public ArrayList<Hallgato> getHallgatok() {
         return hallgatok;
     }
 
-    public void setHallgatok(List<Hallgato> hallgatok) {
+    public void setHallgatok(ArrayList<Hallgato> hallgatok) {
         this.hallgatok = hallgatok;
     }
 
