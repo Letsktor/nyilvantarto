@@ -1,7 +1,5 @@
 package hu.undieb.nyilvantarto;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -14,11 +12,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class KurzusokDAO {
-    private static volatile KurzusokDAO instance;
+public class KurzusokUtils {
+    private static volatile KurzusokUtils instance;
     private LiveData<ArrayList<Kurzus>> kurzusok;
     private DatabaseReference database= FirebaseDatabase.getInstance().getReference("Kurzusok");
-    private KurzusokDAO(){
+    private KurzusokUtils(){
         if (null==kurzusok)
         {
             kurzusok=new MutableLiveData<>();
@@ -44,9 +42,9 @@ public class KurzusokDAO {
             }
         });
     }
-    public static KurzusokDAO getInstance(){
+    public static KurzusokUtils getInstance(){
         if (null == instance) {
-            instance = new KurzusokDAO();
+            instance = new KurzusokUtils();
         }
         return instance;
     }
