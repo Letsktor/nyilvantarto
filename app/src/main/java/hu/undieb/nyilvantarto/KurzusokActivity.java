@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KurzusokActivity extends AppCompatActivity {
     private RecyclerView kurzusokRecView;
@@ -26,7 +27,9 @@ public class KurzusokActivity extends AppCompatActivity {
         kurzusokRecView.setAdapter(adapter);
         kurzusokRecView.setLayoutManager(new LinearLayoutManager(this));
         btnAdd.setOnClickListener(v->{
-            KurzusokUtils.getInstance().addKurzus(new Kurzus("Prog 1"));
+            List<Ora> temp=new ArrayList<>();
+            temp.add(new Ora(KurzusokUtils.getInstance().getCurrentDate(),0));
+            KurzusokUtils.getInstance().addKurzus(new Kurzus("Prog 1",temp));
         });
         KurzusokUtils.getInstance().getKurzusok().observe(this, Kurzusok->kurzusokRecView.setAdapter(new KurzusokRecViewAdapter(Kurzusok,this)));
 

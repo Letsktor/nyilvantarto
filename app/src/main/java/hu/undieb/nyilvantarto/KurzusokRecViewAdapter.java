@@ -1,10 +1,12 @@
 package hu.undieb.nyilvantarto;
 
+import static android.content.ContentValues.TAG;
 import static androidx.core.content.ContextCompat.getSystemService;
 import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +61,8 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
             });
             imgHallgatok.setOnClickListener(vi->{
                 Intent intent=new Intent(context,HallgatokActivity.class);
+                intent.putExtra("kurzus_nev",holder.textView.getText().toString());
+
                 context.startActivity(intent);
                 dialog.dismiss();
             });

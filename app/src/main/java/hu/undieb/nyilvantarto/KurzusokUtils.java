@@ -11,8 +11,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.Locale;
 
 public class KurzusokUtils {
     private static volatile KurzusokUtils instance;
@@ -59,6 +61,14 @@ public class KurzusokUtils {
     public ArrayList<Hallgato> getHallgatok(Ora ora){
 
         return ora.getHallgatok();
+    }
+    public String getCurrentDate(){
+        Date date= new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return dateFormat.format(date);
+    }
+    public void addHallgato(String kurzusnev,String id,Hallgato hallgato){
+        database.child(kurzusnev).child("orak").child(id).child("hallgatok").child("0").setValue(hallgato);
     }
 
 

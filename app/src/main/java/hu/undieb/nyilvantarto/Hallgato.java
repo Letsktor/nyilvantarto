@@ -21,7 +21,7 @@ public class Hallgato {
     }
 
 
-
+    public Hallgato(){}
     public Hallgato(String name, String cardNumber, String cardId) {
         this.name = name;
         this.cardNumber = cardNumber;

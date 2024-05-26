@@ -3,6 +3,7 @@ package hu.undieb.nyilvantarto;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 @IgnoreExtraProperties
 public class Kurzus {
@@ -15,7 +16,7 @@ public class Kurzus {
     }
 
     private String kurzusNev;
-    private List<Ora> orak;
+    private List<Ora> orak=new ArrayList<>();
 
     public List<Ora> getOrak() {
         return orak;
@@ -36,8 +37,9 @@ public class Kurzus {
                 '}';
     }
 
-    public Kurzus(String kurzusNev) {
+    public Kurzus(String kurzusNev,List<Ora> orak) {
         this.kurzusNev = kurzusNev;
+        this.orak=orak;
     }
     public Kurzus()
     {

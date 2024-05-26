@@ -22,6 +22,10 @@ public class Ora {
         this.date = date;
         this.jelenlevok=jelenlevok;
     }
+    public Ora()
+    {
+
+    }
 
     public String getDate() {
         return date;
