@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 @IgnoreExtraProperties
 public class Ora {
-    private String date;
+    private String date="";
     private int jelenlevok;
     private ArrayList<Hallgato> hallgatok=new ArrayList<>();
 

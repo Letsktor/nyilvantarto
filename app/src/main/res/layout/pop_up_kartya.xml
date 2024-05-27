@@ -1,65 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/bottom_stroke"
-        android:text="MInta Eszter"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="34sp" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/bottom_stroke"
-        android:shadowColor="#000000"
-        android:text="NFC:"
-        android:textAlignment="viewStart"
-        android:textColor="#000000"
-        android:textSize="24sp" />
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView12"
-            android:layout_width="317dp"
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="20dp"
             android:background="@drawable/bottom_stroke"
-            android:text="Kártya szám:"
+            android:text="MInta Eszter"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/txtNfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/bottom_stroke"
+            android:shadowColor="#000000"
+            android:text="NFC:"
+            android:textAlignment="viewStart"
             android:textColor="#000000"
             android:textSize="24sp" />
 
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="51dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_qr_code_scanner_24" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
 
+            <TextView
+                android:id="@+id/txtCadNumber"
+                android:layout_width="317dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bottom_stroke"
+                android:text="Kártya szám:"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/imgQrCode"
+                android:layout_width="51dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/baseline_qr_code_scanner_24" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="0"
+            android:background="@drawable/button"
+            android:elevation="10dp"
+            android:text="Kártya rögzítése!"
+            android:textColor="@color/white" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="0"
-        android:elevation="10dp"
-        android:textColor="@color/white"
-        android:text="Kártya rögzítése!"
-        android:background="@drawable/button"/>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

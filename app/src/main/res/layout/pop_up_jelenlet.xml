@@ -16,7 +16,7 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toTopOf="@+id/btnRecord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -25,13 +25,13 @@
         android:layout_width="51dp"
         android:layout_height="47dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button7"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
-        app:layout_constraintTop_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRecord"
+        app:layout_constraintEnd_toStartOf="@+id/btnRecord"
+        app:layout_constraintTop_toTopOf="@+id/btnRecord"
         app:srcCompat="@drawable/baseline_qr_code_scanner_24" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnJelenlet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -59,9 +59,9 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/button7"
-        app:layout_constraintStart_toEndOf="@+id/button7"
-        app:layout_constraintTop_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toBottomOf="@+id/btnJelenlet"
+        app:layout_constraintStart_toEndOf="@+id/btnJelenlet"
+        app:layout_constraintTop_toTopOf="@+id/btnJelenlet"
         app:layout_constraintVertical_bias="0.444" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

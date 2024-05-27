@@ -62,7 +62,6 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
             imgHallgatok.setOnClickListener(vi->{
                 Intent intent=new Intent(context,HallgatokActivity.class);
                 intent.putExtra("kurzus_nev",holder.textView.getText().toString());
-
                 context.startActivity(intent);
                 dialog.dismiss();
             });

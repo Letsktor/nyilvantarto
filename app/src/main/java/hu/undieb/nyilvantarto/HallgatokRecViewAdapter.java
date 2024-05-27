@@ -1,5 +1,6 @@
 package hu.undieb.nyilvantarto;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,18 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecViewAdapter.ViewHolder> {
-    public HallgatokRecViewAdapter(List<Hallgato> hallgatok) {
+    public HallgatokRecViewAdapter(List<Hallgato> hallgatok,String kurzus_nev) {
         this.hallgatok = hallgatok;
+        this.kurzus_nev=kurzus_nev;
     }
 
     private List<Hallgato> hallgatok;
+    private String kurzus_nev;
     @NonNull
     @Override
     public HallgatokRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,7 +45,7 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
                 hallgatok.get(position).setName("");
             });
             holder.delete.setOnClickListener(v2->{
-                hallgatok.remove(position);
+                KurzusokUtils.getInstance().removeHallgato(kurzus_nev,"0",Integer.toString(position));
                 holder.con.setVisibility(View.GONE);
             });
           return true;
@@ -66,13 +71,17 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
 
 
             holder.parent.setOnClickListener(v->{
-                AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                Intent intent=new Intent(holder.parent.getContext(), pop_up_kartyaActivity.class);
+                intent.putExtra("tanulo_nev",holder.txtView.getText());
+                holder.parent.getContext().startActivity(intent);
+
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
                 View view = LayoutInflater.from(holder.parent.getContext()).inflate(R.layout.pop_up_kartya, null);
                 TextView name=view.findViewById(R.id.txtName);
                 name.setText(hallgatok.get(position).getName());
                 builder.setView(view);
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show();*/
                 holder.card.setAlpha(1.0f);
             });
         }
