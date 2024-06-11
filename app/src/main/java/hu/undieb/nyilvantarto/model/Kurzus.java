@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.model;
 
 
 import com.google.firebase.database.IgnoreExtraProperties;

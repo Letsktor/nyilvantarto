@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,6 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hu.undieb.nyilvantarto.model.Kurzus;
+import hu.undieb.nyilvantarto.model.KurzusokUtils;
+import hu.undieb.nyilvantarto.model.Ora;
+import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.activites.adapters.KurzusokRecViewAdapter;
 
 public class KurzusokActivity extends AppCompatActivity {
     private RecyclerView kurzusokRecView;

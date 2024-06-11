@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites;
 
 import android.os.Bundle;
 
@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hu.undieb.nyilvantarto.model.Hallgato;
+import hu.undieb.nyilvantarto.activites.adapters.JelenletRecViewAdapter;
+import hu.undieb.nyilvantarto.R;
 
 public class JelenletActivity extends AppCompatActivity {
     private RecyclerView recyclerView;

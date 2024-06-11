@@ -1,9 +1,9 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
-import java.util.List;
+
 @IgnoreExtraProperties
 public class Ora {
     private String date="";

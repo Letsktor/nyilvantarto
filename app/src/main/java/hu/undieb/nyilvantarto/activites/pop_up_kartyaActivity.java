@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -18,6 +18,9 @@ import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
+
+import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.activites.HallgatokActivity;
 
 public class pop_up_kartyaActivity extends AppCompatActivity {
     public TextView text;

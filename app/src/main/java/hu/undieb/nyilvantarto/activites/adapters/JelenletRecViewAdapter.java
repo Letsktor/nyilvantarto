@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import hu.undieb.nyilvantarto.model.Hallgato;
+import hu.undieb.nyilvantarto.R;
 
 public class JelenletRecViewAdapter extends RecyclerView.Adapter<JelenletRecViewAdapter.ViewHolder> {
     private List<Hallgato> hallgatok;

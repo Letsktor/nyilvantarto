@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
+import hu.undieb.nyilvantarto.model.Ora;
+import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.activites.JelenletActivity;
 
 public class StatisztikaRecViewAdapter  extends RecyclerView.Adapter<StatisztikaRecViewAdapter.ViewHolder> {
     private List<Ora> orak;

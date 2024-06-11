@@ -1,20 +1,17 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites;
 
-import android.app.Dialog;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
+import hu.undieb.nyilvantarto.model.Ora;
+import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.activites.adapters.StatisztikaRecViewAdapter;
 
 public class StatisztikaActivity extends AppCompatActivity {
     RecyclerView statisztikaRecView;

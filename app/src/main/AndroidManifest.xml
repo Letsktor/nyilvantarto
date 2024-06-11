@@ -17,10 +17,10 @@
         android:theme="@style/Theme.Nyilvantarto"
         tools:targetApi="31">
         <activity
-            android:name=".Register"
+            android:name=".activites.Register"
             android:exported="false" />
         <activity
-            android:name=".ChooserActivity"
+            android:name=".activites.ChooserActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -37,22 +37,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".KurzusokActivity"
+            android:name=".activites.KurzusokActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HallgatokActivity"
+            android:name=".activites.HallgatokActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".StatisztikaActivity"
+            android:name=".activites.StatisztikaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".JelenletActivity"
+            android:name=".activites.JelenletActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Login"
+            android:name=".activites.Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".pop_up_kartyaActivity"
+            android:name=".activites.pop_up_kartyaActivity"
             android:screenOrientation="portrait" />
     </application>
 

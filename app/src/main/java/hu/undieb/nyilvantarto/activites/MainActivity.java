@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites;
 
 
 
@@ -26,6 +26,8 @@ import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
+
+import hu.undieb.nyilvantarto.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -131,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.pop_up_statisztika_layout, null);
-        // Set your custom message here
 
         builder.setView(view);
         builder.setPositiveButton("OK", null); // Add positive button if needed

@@ -1,12 +1,7 @@
-package hu.undieb.nyilvantarto;
-
-import static android.content.ContentValues.TAG;
-import static androidx.core.content.ContextCompat.getSystemService;
-import static androidx.core.content.ContextCompat.startActivity;
+package hu.undieb.nyilvantarto.activites.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hu.undieb.nyilvantarto.model.Kurzus;
+import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.activites.HallgatokActivity;
+import hu.undieb.nyilvantarto.activites.StatisztikaActivity;
 
 public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecViewAdapter.ViewHolder> {
     private List<Kurzus> kurzusok;
@@ -55,12 +55,12 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
             AlertDialog dialog = builder.create();
 
             imgStatisztika.setOnClickListener(vo->{
-                Intent intent=new Intent(context,StatisztikaActivity.class);
+                Intent intent=new Intent(context, StatisztikaActivity.class);
                 context.startActivity(intent);
                 dialog.dismiss();
             });
             imgHallgatok.setOnClickListener(vi->{
-                Intent intent=new Intent(context,HallgatokActivity.class);
+                Intent intent=new Intent(context, HallgatokActivity.class);
                 intent.putExtra("kurzus_nev",holder.textView.getText().toString());
                 context.startActivity(intent);
                 dialog.dismiss();

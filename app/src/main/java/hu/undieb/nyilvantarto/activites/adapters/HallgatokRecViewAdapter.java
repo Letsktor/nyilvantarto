@@ -1,4 +1,4 @@
-package hu.undieb.nyilvantarto;
+package hu.undieb.nyilvantarto.activites.adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,12 +14,15 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
 
+import hu.undieb.nyilvantarto.model.Hallgato;
+import hu.undieb.nyilvantarto.model.KurzusokUtils;
+import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.activites.pop_up_kartyaActivity;
+
 public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecViewAdapter.ViewHolder> {
-    public HallgatokRecViewAdapter(List<Hallgato> hallgatok,String kurzus_nev) {
+    public HallgatokRecViewAdapter(List<Hallgato> hallgatok, String kurzus_nev) {
         this.hallgatok = hallgatok;
         this.kurzus_nev=kurzus_nev;
     }
