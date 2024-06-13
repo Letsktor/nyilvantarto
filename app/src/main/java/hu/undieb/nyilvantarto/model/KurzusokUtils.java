@@ -67,14 +67,13 @@ public class KurzusokUtils {
     }
     public ArrayList<Hallgato> getHallgatok(Ora ora){
 
-        return ora.getHallgatok();
+        return kDAO.getHallgatok(ora);
     }
     public String getCurrentDate(){
         return kDAO.getCurrentDate();
     }
     public void addHallgato(String kurzusnev,String id,Hallgato hallgato){
         kDAO.addHallgato(kurzusnev,id,hallgato);
-        //database.child(kurzusnev).child("orak").child(id).child("hallgatok").child("0").setValue(hallgato);
     }
     public void updateHallgato(Hallgato hallgato,String kurzusnev,String hallgatoId)
     {

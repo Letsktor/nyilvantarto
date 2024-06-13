@@ -9,4 +9,5 @@ public interface KurzusDAO {
     public void addHallgato(String kurzusnev,String id,Hallgato hallgato);
     public void initData(LiveData<ArrayList<Kurzus>> kurzusok,LiveData<ArrayList<Hallgato>> hallgatok,LiveData<ArrayList<Ora>> orak);
     public String getCurrentDate();
+    public ArrayList<Hallgato> getHallgatok(Ora ora);
 }

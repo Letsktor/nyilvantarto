@@ -30,6 +30,11 @@ public class FireBaseKurzusDAO implements KurzusDAO{
     }
 
     @Override
+    public ArrayList<Hallgato> getHallgatok(Ora ora) {
+        return ora.getHallgatok();
+    }
+
+    @Override
     public void initData(LiveData<ArrayList<Kurzus>> kurzusok,LiveData<ArrayList<Hallgato>> hallgatok,LiveData<ArrayList<Ora>> orak) {
         database.addValueEventListener(new ValueEventListener() {
             @Override
