@@ -34,7 +34,7 @@ public class StatisztikaRecViewAdapter  extends RecyclerView.Adapter<Statisztika
     @Override
     public void onBindViewHolder(@NonNull StatisztikaRecViewAdapter.ViewHolder holder, int position) {
         holder.txtDatumView.setText(orak.get(position).getDate());
-        holder.txtJelenlevok.setText(String.valueOf(orak.get(position).getJelenlevok()));
+        holder.txtJelenlevok.setText(String.valueOf(orak.get(position).getJelenlevok_szama()));
         holder.parent.setOnClickListener(v->{
             Intent intent=new Intent(mContext, JelenletActivity.class);
             mContext.startActivity(intent);

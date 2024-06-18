@@ -3,7 +3,6 @@ package hu.undieb.nyilvantarto.activites;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -13,7 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
@@ -21,37 +24,35 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 
 import hu.undieb.nyilvantarto.R;
-import hu.undieb.nyilvantarto.activites.HallgatokActivity;
-import hu.undieb.nyilvantarto.model.Hallgato;
 import hu.undieb.nyilvantarto.model.KurzusokUtils;
 
-public class pop_up_kartyaActivity extends AppCompatActivity {
-    public TextView text ,txtnfc;
+public class JelenletRog extends AppCompatActivity {
+    TextView name;
+    Button button;
+    ImageView QrCode;
     Context context;
     NfcAdapter nfcAdapter;
     Intent intent;
     PendingIntent pendingIntent;
-    ImageView QrCodeScanner;
-    TextView txtBArCOdeValue;
     Tag tag;
-    Button button;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pop_up_kartya);
-        text=findViewById(R.id.txtName);
-        button=findViewById(R.id.btnRecord);
-        txtBArCOdeValue=findViewById(R.id.txtCadNumber);
-        QrCodeScanner=findViewById(R.id.imgQrCode);
+        setContentView(R.layout.activity_jelenlet_rog);
+        name=findViewById(R.id.txtName);
+        button=findViewById(R.id.btnJelenlet);
+        QrCode=findViewById(R.id.imgQR);
         Intent it=getIntent();
-        text.setText(it.getStringExtra("tanulo_nev"));
+        name.setText(it.getStringExtra("tanulo_nev"));
         nfcAdapter=NfcAdapter.getDefaultAdapter(this);
         intent=new Intent(this,getClass());
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
-        txtnfc=findViewById(R.id.txtNfc);
         context=getApplicationContext();
+        button.setOnClickListener(v ->{
+            Intent i=new Intent(this, HallgatokActivity.class);
+            startActivity(i);
+        } );
         if(tag!=null)
         {
             Toast.makeText(this,tag.toString(),Toast.LENGTH_LONG).show();
@@ -62,7 +63,7 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
                         Barcode.FORMAT_AZTEC)
                 .build();
         GmsBarcodeScanner scanner = GmsBarcodeScanning.getClient(this);
-        QrCodeScanner.setOnClickListener(new View.OnClickListener() {
+        QrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 scanner
@@ -71,7 +72,7 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
                                 barcode -> {
                                     String rawValue = barcode.getRawValue();
                                     String[] temp=rawValue.split("/");
-                                    txtBArCOdeValue.setText(temp[temp.length-1]);
+                                    //txtBArCOdeValue.setText(temp[temp.length-1]);
                                 })
                         .addOnCanceledListener(
                                 () -> {
@@ -84,17 +85,6 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
             }
 
         });
-        button.setOnClickListener(v->{
-
-                Intent i=new Intent(this, HallgatokActivity.class);
-                startActivity(i);
-                SharedPreferences sharedPref = getSharedPreferences("KurzusNev", Context.MODE_PRIVATE);
-                KurzusokUtils.getInstance().updateHallgato(new Hallgato(text.getText().toString(),txtBArCOdeValue.getText().toString(),txtnfc.getText().toString()),sharedPref.getString("kurzus_nev", null),it.getStringExtra("hallgato_id"));
-
-
-
-        });
-
     }
     @Override
     protected void onNewIntent(Intent intent) {
@@ -115,7 +105,8 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
                 }
 
             }
-            txtnfc.setText(sb.toString());
+
+            //txtnfc.setText(sb.toString());
         }
 
 
@@ -133,5 +124,4 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
         super.onResume();
         ReadModeOn();
     }
-
 }

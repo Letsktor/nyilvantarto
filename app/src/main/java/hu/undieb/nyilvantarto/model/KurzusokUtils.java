@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class KurzusokUtils {
@@ -24,7 +25,7 @@ public class KurzusokUtils {
     private LiveData<ArrayList<Kurzus>> kurzusok;
     private LiveData<ArrayList<Hallgato>> hallgatok;
     private LiveData<ArrayList<Ora>> orak;
-    private DatabaseReference database= FirebaseDatabase.getInstance().getReference(FirebaseAuth.getInstance().getUid()).child("Kurzusok");
+    private LiveData<ArrayList<Jelenlet>> jelenlevok;
     private KurzusokUtils(KurzusDAO kDAO){
         this.kDAO=kDAO;
 
@@ -33,12 +34,13 @@ public class KurzusokUtils {
             hallgatok=new MutableLiveData<>();
             kurzusok=new MutableLiveData<>();
             orak=new MutableLiveData<>();
+            jelenlevok=new MutableLiveData<>();
             initData();
         }
     }
 
     private void initData() {
-        kDAO.initData(kurzusok,hallgatok,orak);
+        kDAO.initData(kurzusok,hallgatok,orak,jelenlevok);
     }
     public static KurzusokUtils getInstance(){
         if (null == instance) {
@@ -48,26 +50,33 @@ public class KurzusokUtils {
     }
     public LiveData<ArrayList<Kurzus>> getKurzusok(){
         return kurzusok;
+
+    }
+    public int getKurzus(String kurzusnev)
+    {
+        int index=-1;
+        for (Kurzus k:kurzusok.getValue()) {
+            if(k.getKurzusNev().equals(kurzusnev)==true)
+            {
+                index=kurzusok.getValue().indexOf(k);
+            }
+        }
+        return index;
     }
     public LiveData<ArrayList<Hallgato>> getHallgatok(){
 
         return hallgatok;
     }
-    public void removeHallgato(String kurzusnev,String id,String position)
+    public void removeHallgato(String kurzusnev,String position)
     {
-       DatabaseReference ref= database.child(kurzusnev).child("orak").child(id).child("hallgatok").child(position);
-        ref.removeValue().addOnSuccessListener(aVoid -> {
-            Log.d("KurzusokUtils", "Successfully removed hallgato at path: " + ref.toString());
-        }).addOnFailureListener(e -> {
-            Log.e("KurzusokUtils", "Failed to remove hallgato at path: " + ref.toString(), e);
-        });
+       kDAO.removeHallgato(kurzusnev,position);
     }
     public void addKurzus(Kurzus kurzus){
        kDAO.addKurzus(kurzus);
     }
-    public ArrayList<Hallgato> getHallgatok(Ora ora){
+    public ArrayList<Hallgato> getHallgatok(Kurzus kurzus){
 
-        return kDAO.getHallgatok(ora);
+        return kDAO.getHallgatok(kurzus);
     }
     public String getCurrentDate(){
         return kDAO.getCurrentDate();
@@ -77,10 +86,16 @@ public class KurzusokUtils {
     }
     public void updateHallgato(Hallgato hallgato,String kurzusnev,String hallgatoId)
     {
-        DatabaseReference ref=database.child(kurzusnev).child("orak").child(Integer.toString(orak.getValue().size()-1)).child("hallgatok").child(hallgatoId);
-
+        kDAO.updateHallgato(hallgato,kurzusnev,hallgatoId);
     }
-
+    public void addOra(String kurzusnev, Ora ora)
+    {
+      kDAO.addOra(kurzusnev,ora);
+    }
+    public void updateOra(String kurzusnev,Ora ora,String oraId)
+    {
+        kDAO.updateOra(kurzusnev,ora,oraId);
+    }
 
 
 }

@@ -18,6 +18,15 @@ public class Kurzus {
     private String kurzusNev;
     private List<Ora> orak=new ArrayList<>();
 
+    public List<Hallgato> getHallgatok() {
+        return hallgatok;
+    }
+
+    public void setHallgatok(List<Hallgato> hallgatok) {
+        this.hallgatok = hallgatok;
+    }
+
+    private List<Hallgato> hallgatok=new ArrayList<>();
     public List<Ora> getOrak() {
         return orak;
     }
@@ -37,9 +46,9 @@ public class Kurzus {
                 '}';
     }
 
-    public Kurzus(String kurzusNev,List<Ora> orak) {
+    public Kurzus(String kurzusNev) {
         this.kurzusNev = kurzusNev;
-        this.orak=orak;
+
     }
     public Kurzus()
     {

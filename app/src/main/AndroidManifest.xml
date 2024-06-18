@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Nyilvantarto"
         tools:targetApi="31">
         <activity
+            android:name=".activites.JelenletRog"
+            android:exported="false" />
+        <activity
+            android:name=".activites.Edit"
+            android:exported="false" />
+        <activity
             android:name=".activites.Register"
             android:exported="false" />
         <activity

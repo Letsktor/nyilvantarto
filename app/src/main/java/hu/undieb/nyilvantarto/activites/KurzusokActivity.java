@@ -35,7 +35,7 @@ public class KurzusokActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(v->{
             List<Ora> temp=new ArrayList<>();
             temp.add(new Ora(KurzusokUtils.getInstance().getCurrentDate(),0));
-            KurzusokUtils.getInstance().addKurzus(new Kurzus("Prog 1",temp));
+            KurzusokUtils.getInstance().addKurzus(new Kurzus("Prog 1"));
         });
         KurzusokUtils.getInstance().getKurzusok().observe(this, Kurzusok->kurzusokRecView.setAdapter(new KurzusokRecViewAdapter(Kurzusok,this)));
 

@@ -13,11 +13,12 @@ import java.util.List;
 
 import hu.undieb.nyilvantarto.model.Hallgato;
 import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.model.Jelenlet;
 
 public class JelenletRecViewAdapter extends RecyclerView.Adapter<JelenletRecViewAdapter.ViewHolder> {
-    private List<Hallgato> hallgatok;
+    private List<Jelenlet> hallgatok;
 
-    public JelenletRecViewAdapter(List<Hallgato> hallgatok) {
+    public JelenletRecViewAdapter(List<Jelenlet> hallgatok) {
         this.hallgatok = hallgatok;
     }
 
@@ -31,12 +32,12 @@ public class JelenletRecViewAdapter extends RecyclerView.Adapter<JelenletRecView
     @Override
     public void onBindViewHolder(@NonNull JelenletRecViewAdapter.ViewHolder holder, int position) {
         holder.textView.setText(hallgatok.get(position).getName());
-        if(hallgatok.get(position).isHianyzik()==true)
+        if(hallgatok.get(position).getStatus()== Jelenlet.Status.MISSING)
         {
             holder.cross.setVisibility(View.VISIBLE);
-        } else if (hallgatok.get(position).isJelenvan()==true) {
+        } else if (hallgatok.get(position).getStatus()== Jelenlet.Status.PRESENT) {
             holder.green_check.setVisibility(View.VISIBLE);
-        } else if (hallgatok.get(position).isOktatoaltalrogzitve()==true) {
+        } else if (hallgatok.get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER) {
             holder.orange_check.setVisibility(View.VISIBLE);
         }
 

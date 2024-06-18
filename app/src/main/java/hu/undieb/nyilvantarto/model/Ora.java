@@ -7,19 +7,34 @@ import java.util.ArrayList;
 @IgnoreExtraProperties
 public class Ora {
     private String date="";
-    private int jelenlevok;
-    private ArrayList<Hallgato> hallgatok=new ArrayList<>();
 
-    public ArrayList<Hallgato> getHallgatok() {
-        return hallgatok;
+    public int getJelenlevok_szama() {
+        return jelenlevok_szama;
     }
 
-    public void setHallgatok(ArrayList<Hallgato> hallgatok) {
-        this.hallgatok = hallgatok;
+    public void setJelenlevok_szama(int jelenlevok_szama) {
+        this.jelenlevok_szama = jelenlevok_szama;
     }
 
-    public Ora(String date, int jelenlevok) {
+    private int jelenlevok_szama;
+    private ArrayList<Jelenlet> jelenlevok=new ArrayList<>();
+
+    public ArrayList<Jelenlet> getJelenlevok() {
+        return jelenlevok;
+    }
+
+    public void setJelenlevok(ArrayList<Jelenlet> jelenlevok) {
+        this.jelenlevok = jelenlevok;
+    }
+
+    public Ora(String date, int jelenlevok_szama) {
         this.date = date;
+        this.jelenlevok_szama=jelenlevok_szama;
+        this.jelenlevok=new ArrayList<>();
+    }
+    public Ora(String date, int jelenlevok_szama,ArrayList<Jelenlet> jelenlevok) {
+        this.date = date;
+        this.jelenlevok_szama=jelenlevok_szama;
         this.jelenlevok=jelenlevok;
     }
     public Ora()
@@ -35,13 +50,7 @@ public class Ora {
         this.date = date;
     }
 
-    public int getJelenlevok() {
-        return jelenlevok;
-    }
 
-    public void setJelenlevok(int jelenlevok) {
-        this.jelenlevok = jelenlevok;
-    }
 
     @Override
     public String toString() {
