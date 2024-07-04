@@ -31,4 +31,12 @@ public class Jelenlet {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Jelenlet{" +
+                "name='" + name + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

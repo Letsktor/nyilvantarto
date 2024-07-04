@@ -22,19 +22,21 @@ import java.util.Locale;
 public class KurzusokUtils {
     private static volatile KurzusokUtils instance;
     private KurzusDAO kDAO;
-    private LiveData<ArrayList<Kurzus>> kurzusok;
-    private LiveData<ArrayList<Hallgato>> hallgatok;
+    private MutableLiveData<ArrayList<Kurzus>> kurzusok;
+    private LiveData<ArrayList<Hallgato>> hallgatok=new MutableLiveData<>();
     private LiveData<ArrayList<Ora>> orak;
     private LiveData<ArrayList<Jelenlet>> jelenlevok;
+    private LiveData<ArrayList<Hallgato>> temp;
     private KurzusokUtils(KurzusDAO kDAO){
         this.kDAO=kDAO;
 
         if (null==kurzusok)
         {
-            hallgatok=new MutableLiveData<>();
+            //hallgatok=new MutableLiveData<>();
             kurzusok=new MutableLiveData<>();
             orak=new MutableLiveData<>();
             jelenlevok=new MutableLiveData<>();
+            //hallgatok=new MutableLiveData<>();
             initData();
         }
     }
@@ -52,20 +54,35 @@ public class KurzusokUtils {
         return kurzusok;
 
     }
-    public int getKurzus(String kurzusnev)
+    public Kurzus getKurzus(String kurzusnev)
     {
+        Kurzus ki=new Kurzus();
         int index=-1;
         for (Kurzus k:kurzusok.getValue()) {
             if(k.getKurzusNev().equals(kurzusnev)==true)
-            {
+            {   ki=k;
                 index=kurzusok.getValue().indexOf(k);
             }
         }
-        return index;
+        return ki;
     }
-    public LiveData<ArrayList<Hallgato>> getHallgatok(){
+    public LiveData<ArrayList<Hallgato>> getHallgatok(String kurzusnev){
+        ArrayList<Hallgato> choosenHallgatok=new ArrayList<>();
+        //LiveData<ArrayList<Hallgato>> choosenHallgatok=new MutableLiveData<>(new ArrayList<>());
+        for (Kurzus k:kurzusok.getValue()) {
+                if(k.getKurzusNev().equals(kurzusnev)==true)
+                {
+                    //choosenHallgatok.getValue().addAll(k.getHallgatok());
+                    choosenHallgatok.addAll(k.getHallgatok());
+                    break;
+                }
+            }
+        ((MutableLiveData<ArrayList<Hallgato>>) hallgatok).postValue(choosenHallgatok);
 
+        Log.d("HALLGatokegy",hallgatok.getValue().toString());
+        Log.d("HALLGatokketto",choosenHallgatok.toString().toString());
         return hallgatok;
+
     }
     public void removeHallgato(String kurzusnev,String position)
     {
@@ -73,10 +90,6 @@ public class KurzusokUtils {
     }
     public void addKurzus(Kurzus kurzus){
        kDAO.addKurzus(kurzus);
-    }
-    public ArrayList<Hallgato> getHallgatok(Kurzus kurzus){
-
-        return kDAO.getHallgatok(kurzus);
     }
     public String getCurrentDate(){
         return kDAO.getCurrentDate();

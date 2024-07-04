@@ -3,7 +3,6 @@ package hu.undieb.nyilvantarto.model;
 import androidx.lifecycle.LiveData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface KurzusDAO {
     public void addKurzus(Kurzus kurzus);
@@ -16,4 +15,5 @@ public interface KurzusDAO {
     public void addOra(String kurzusnev,Ora ora);
     public void updateOra(String kurzusnev,Ora ora,String oraId);
     public void addJelenlet();
+
 }

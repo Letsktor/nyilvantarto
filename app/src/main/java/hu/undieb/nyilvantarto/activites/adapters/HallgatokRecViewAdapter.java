@@ -74,6 +74,7 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
                 holder.card.setAlpha(1.0f);
             });
         }
+
     }
 
     private void EditButton(@NonNull ViewHolder holder, int position) {
@@ -103,7 +104,6 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             view.refreshDrawableState();
         });
     }
-
     @Override
     public int getItemCount() {
         return hallgatok.size();

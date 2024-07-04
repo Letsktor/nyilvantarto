@@ -85,11 +85,6 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
     public int getItemCount() {
         return kurzusok.size();
     }
-    public void setKurzusok(ArrayList<Kurzus> kurzusok)
-    {
-        this.kurzusok=kurzusok;
-        notifyDataSetChanged();
-    }
     public class ViewHolder extends RecyclerView.ViewHolder{
         private CardView parent;
         private TextView textView;

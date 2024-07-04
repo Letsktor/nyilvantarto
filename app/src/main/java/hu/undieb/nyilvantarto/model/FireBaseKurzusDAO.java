@@ -1,8 +1,6 @@
 package hu.undieb.nyilvantarto.model;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -19,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,7 +25,8 @@ public class FireBaseKurzusDAO implements KurzusDAO{
     private DatabaseReference database= FirebaseDatabase.getInstance().getReference(FirebaseAuth.getInstance().getUid()).child("Kurzusok");
     @Override
     public void addKurzus(Kurzus kurzus) {
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
+        //database.removeValue();
+        database.child(kurzus.getKurzusNev()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists())
@@ -39,7 +37,6 @@ public class FireBaseKurzusDAO implements KurzusDAO{
                     database.child(kurzus.getKurzusNev()).setValue(kurzus);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -70,18 +67,11 @@ public class FireBaseKurzusDAO implements KurzusDAO{
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Kurzus kurzus=dataSnapshot.getValue((Kurzus.class));
                     tempK.add(kurzus);
-                    tempH.addAll(kurzus.getHallgatok());
+                    //tempH.addAll(kurzus.getHallgatok());
 
-                    for(Ora o:kurzus.getOrak())
-                    {
-                        tempO.add(o);
-                        if(o.getDate().equals(getCurrentDate()))
-                        {
-                            tempJ.addAll(o.getJelenlevok());
-                        }
-                    }
                 }
                 ((MutableLiveData<ArrayList<Kurzus>>)kurzusok).setValue(tempK);
+                Log.d("LUL",kurzusok.getValue().toString());
                 ((MutableLiveData<ArrayList<Hallgato>>)hallgatok).setValue(tempH);
                 ((MutableLiveData<ArrayList<Ora>>)orak).setValue(tempO);
 
@@ -133,11 +123,12 @@ public class FireBaseKurzusDAO implements KurzusDAO{
         updateFields.put("date",ora.getDate());
         updateFields.put("jelenlevok",ora.getJelenlevok());
         updateFields.put("jelenlevok_szama",ora.getJelenlevok_szama());
-        ref.updateChildren(updateFields);
+        ref.updateChildren(updateFields);;
     }
 
     @Override
     public void addJelenlet() {
 
     }
+
 }

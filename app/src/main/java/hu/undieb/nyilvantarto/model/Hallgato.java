@@ -37,4 +37,12 @@ public class Hallgato {
         this.cardId = cardId;
     }
 
+    @Override
+    public String toString() {
+        return "Hallgato{" +
+                "name='" + name + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", cardId='" + cardId + '\'' +
+                '}';
+    }
 }
