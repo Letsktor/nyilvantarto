@@ -14,6 +14,6 @@ public interface KurzusDAO {
     public void updateHallgato(Hallgato hallgato,String kurzusnev,String hallgatoId);
     public void addOra(String kurzusnev,Ora ora);
     public void updateOra(String kurzusnev,Ora ora,String oraId);
-    public void addJelenlet();
-
+    public void updateJelenlet(String kurzusnev, String oraid, int position, Jelenlet jelenlet);
+    public String getDayOfTheWeek();
 }

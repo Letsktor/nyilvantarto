@@ -7,10 +7,15 @@ public class Jelenlet {
         MISSING
     }
     private String name;
-    private Status status=Status.MISSING;
+    private Status status;
 
     public Jelenlet(String name) {
         this.name = name;
+        this.status=Status.MISSING;
+    }
+    public Jelenlet(String name,Status status) {
+        this.name = name;
+        this.status=status;
     }
     public Jelenlet()
     {

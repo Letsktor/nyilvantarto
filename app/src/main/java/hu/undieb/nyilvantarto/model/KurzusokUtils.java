@@ -23,21 +23,22 @@ public class KurzusokUtils {
     private static volatile KurzusokUtils instance;
     private KurzusDAO kDAO;
     private MutableLiveData<ArrayList<Kurzus>> kurzusok;
-    private LiveData<ArrayList<Hallgato>> hallgatok=new MutableLiveData<>();
+    private LiveData<ArrayList<Hallgato>> hallgatok;
     private LiveData<ArrayList<Ora>> orak;
     private LiveData<ArrayList<Jelenlet>> jelenlevok;
     private LiveData<ArrayList<Hallgato>> temp;
+    private String kurzus="";
     private KurzusokUtils(KurzusDAO kDAO){
         this.kDAO=kDAO;
 
         if (null==kurzusok)
         {
-            //hallgatok=new MutableLiveData<>();
+            hallgatok=new MutableLiveData<>(new ArrayList<Hallgato>());
             kurzusok=new MutableLiveData<>();
             orak=new MutableLiveData<>();
             jelenlevok=new MutableLiveData<>();
-            //hallgatok=new MutableLiveData<>();
             initData();
+
         }
     }
 
@@ -66,8 +67,10 @@ public class KurzusokUtils {
         }
         return ki;
     }
+
     public LiveData<ArrayList<Hallgato>> getHallgatok(String kurzusnev){
         ArrayList<Hallgato> choosenHallgatok=new ArrayList<>();
+
         //LiveData<ArrayList<Hallgato>> choosenHallgatok=new MutableLiveData<>(new ArrayList<>());
         for (Kurzus k:kurzusok.getValue()) {
                 if(k.getKurzusNev().equals(kurzusnev)==true)
@@ -77,10 +80,14 @@ public class KurzusokUtils {
                     break;
                 }
             }
-        ((MutableLiveData<ArrayList<Hallgato>>) hallgatok).postValue(choosenHallgatok);
-
+        //((MutableLiveData<ArrayList<Hallgato>>) hallgatok).postValue(choosenHallgatok);
+        if( !kurzus.equals(kurzusnev))
+        {
+            ((MutableLiveData<ArrayList<Hallgato>>) hallgatok).setValue(choosenHallgatok);
+        }
         Log.d("HALLGatokegy",hallgatok.getValue().toString());
         Log.d("HALLGatokketto",choosenHallgatok.toString().toString());
+        kurzus=kurzusnev;
         return hallgatok;
 
     }
@@ -91,15 +98,20 @@ public class KurzusokUtils {
     public void addKurzus(Kurzus kurzus){
        kDAO.addKurzus(kurzus);
     }
+
     public String getCurrentDate(){
         return kDAO.getCurrentDate();
     }
+
     public void addHallgato(String kurzusnev,String id,Hallgato hallgato){
         kDAO.addHallgato(kurzusnev,id,hallgato);
+        hallgatok.getValue().add(hallgato);
+
     }
     public void updateHallgato(Hallgato hallgato,String kurzusnev,String hallgatoId)
     {
         kDAO.updateHallgato(hallgato,kurzusnev,hallgatoId);
+        hallgatok.getValue().set(Integer.parseInt(hallgatoId),hallgato);
     }
     public void addOra(String kurzusnev, Ora ora)
     {
@@ -109,6 +121,12 @@ public class KurzusokUtils {
     {
         kDAO.updateOra(kurzusnev,ora,oraId);
     }
-
-
+    public String getDayOfTheWeek()
+    {
+        return kDAO.getDayOfTheWeek();
+    }
+    public void updateJelenlet(String kurzusnev, String oraid, int position, Jelenlet jelenlet)
+    {
+        kDAO.updateJelenlet(kurzusnev,oraid,position,jelenlet);
+    }
 }

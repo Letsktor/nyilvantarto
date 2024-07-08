@@ -3,6 +3,7 @@ package hu.undieb.nyilvantarto.activites;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -23,8 +24,12 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 
+import java.util.ArrayList;
+
 import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.model.Jelenlet;
 import hu.undieb.nyilvantarto.model.KurzusokUtils;
+import hu.undieb.nyilvantarto.model.Ora;
 
 public class JelenletRog extends AppCompatActivity {
     TextView name;
@@ -44,14 +49,24 @@ public class JelenletRog extends AppCompatActivity {
         QrCode=findViewById(R.id.imgQR);
         Intent it=getIntent();
         name.setText(it.getStringExtra("tanulo_nev"));
+        int position=it.getIntExtra("pos",0);
         nfcAdapter=NfcAdapter.getDefaultAdapter(this);
         intent=new Intent(this,getClass());
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        SharedPreferences sharedPref = getSharedPreferences("KurzusNev", Context.MODE_PRIVATE);
+        String kurzus_nev = sharedPref.getString("kurzus_nev", null);
         pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
         context=getApplicationContext();
         button.setOnClickListener(v ->{
+            //KurzusokUtils.getInstance().updateJelenlet(kurzus_nev,Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1),position,new Jelenlet(name.getText().toString(), Jelenlet.Status.RECORDEDBYTEACHER));
+            ArrayList<Jelenlet> temp=new ArrayList<>();
+            temp.addAll(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok());
+            temp.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
+            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
+
             Intent i=new Intent(this, HallgatokActivity.class);
             startActivity(i);
+
         } );
         if(tag!=null)
         {
@@ -106,7 +121,6 @@ public class JelenletRog extends AppCompatActivity {
 
             }
 
-            //txtnfc.setText(sb.toString());
         }
 
 

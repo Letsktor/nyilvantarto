@@ -66,13 +66,17 @@ public class FireBaseKurzusDAO implements KurzusDAO{
                 ArrayList<Jelenlet> tempJ=new ArrayList<>();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Kurzus kurzus=dataSnapshot.getValue((Kurzus.class));
-                    tempK.add(kurzus);
+                    if(kurzus.getDayOfWeek().equals(getDayOfTheWeek()))
+                    {
+                        tempK.add(kurzus);
+                    }
+
                     //tempH.addAll(kurzus.getHallgatok());
 
                 }
                 ((MutableLiveData<ArrayList<Kurzus>>)kurzusok).setValue(tempK);
                 Log.d("LUL",kurzusok.getValue().toString());
-                ((MutableLiveData<ArrayList<Hallgato>>)hallgatok).setValue(tempH);
+                //((MutableLiveData<ArrayList<Hallgato>>)hallgatok).setValue(tempH);
                 ((MutableLiveData<ArrayList<Ora>>)orak).setValue(tempO);
 
             }
@@ -127,8 +131,23 @@ public class FireBaseKurzusDAO implements KurzusDAO{
     }
 
     @Override
-    public void addJelenlet() {
-
+    public void updateJelenlet(String kurzusnev, String oraid, int position, Jelenlet jelenlet) {
+        DatabaseReference ref = database.child(kurzusnev).child("orak").child(oraid).child("jelenlevok").child(String.valueOf(position));
+        Map<String, Object> jelenletUpdates = new HashMap<>();
+        jelenletUpdates.put("name", jelenlet.getName());
+        jelenletUpdates.put("status", jelenlet.getStatus().toString());
+        ref.updateChildren(jelenletUpdates).addOnSuccessListener(aVoid -> {
+            Log.d("KurzusokUtils", "Successfully updated jelenlet at path: " + ref.toString());
+        }).addOnFailureListener(e -> {
+            Log.e("KurzusokUtils", "Failed to update jelenlet at path: " + ref.toString(), e);
+        });
     }
 
+    @Override
+    public String getDayOfTheWeek() {
+        Date date = new Date();
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
+        String dayOfWeek = dayFormat.format(date);
+        return dayOfWeek;
+    }
 }

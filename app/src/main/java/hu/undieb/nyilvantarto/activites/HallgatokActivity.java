@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,45 +33,51 @@ import hu.undieb.nyilvantarto.model.Ora;
 public class HallgatokActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private Button addBtn;
+    private HallgatokRecViewAdapter adapter;
+    private  ArrayList<Jelenlet> temp=new ArrayList<>();
+    private int jelszam=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hallgatok);
         addBtn=findViewById(R.id.btnAdd);
         recyclerView=findViewById(R.id.recViewHallgato);
+
         SharedPreferences sharedPref = getSharedPreferences("KurzusNev", Context.MODE_PRIVATE);
         String kurzus_nev = sharedPref.getString("kurzus_nev", null);
-
+        recyclerView.setLayoutManager( new LinearLayoutManager(this));
         addBtn.setOnClickListener(v->{
             AddHallgato(kurzus_nev);
-
         });
+        if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()<1)
+        {
 
-        KurzusokUtils.getInstance().getHallgatok(kurzus_nev).observe(this,Hallgatok->{
-            if(Hallgatok!=null)
+            KurzusokUtils.getInstance().addOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),0));
+        }
+            else{
+                temp=KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size() - 1).getJelenlevok();
+                for(Jelenlet jel:temp) {
+                    if(jel.getStatus()== Jelenlet.Status.PRESENT || jel.getStatus()== Jelenlet.Status.RECORDEDBYTEACHER){
+                        jelszam+=1;
+                    }
+                }
+            }
+        KurzusokUtils.getInstance().getHallgatok(kurzus_nev).observe(this,h->{
+            if(h!=null)
             {
-                recyclerView.setAdapter(new HallgatokRecViewAdapter(Hallgatok,kurzus_nev));
-                Log.d("ObservedData", "Hallgatok: " + Hallgatok.toString());
+                    adapter=new HallgatokRecViewAdapter(h,kurzus_nev);
+                    recyclerView.setAdapter(adapter);
+                    Log.d("ObservedData", "Hallgatok: " + h.toString());
+
             }
             else{
                 Log.d("ObservedData", "Hallgatok is null");
             }
 
-            ArrayList<Jelenlet> temp=new ArrayList<>();
-            for (Hallgato h:Hallgatok)
-            {
-                temp.add(new Jelenlet(h.getName()));
-            }
-            if(temp.size()<1)
-            {
-                //KurzusokUtils.getInstance().addOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),0));
-            }
-            else{
-                //KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),0,temp),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()));
-            }
+
 
         });
-        recyclerView.setLayoutManager( new LinearLayoutManager(this));
+
     }
 
     private void AddHallgato(String kurzus_nev) {
@@ -82,6 +90,9 @@ public class HallgatokActivity extends AppCompatActivity {
         dialog.show();
         btnHozzaAdd.setOnClickListener(v2->{
             KurzusokUtils.getInstance().addHallgato(kurzus_nev,Integer.toString(KurzusokUtils.getInstance().getHallgatok(kurzus_nev).getValue().size()),new Hallgato(name.getText().toString(),"",""));
+            temp.add(new Jelenlet(name.getText().toString()));
+            Log.d("LOGD",temp.toString());
+            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),jelszam,temp),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
             dialog.cancel();
         });
 

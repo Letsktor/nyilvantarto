@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 @IgnoreExtraProperties
 public class Kurzus {
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public String dayOfWeek;
     public String getKurzusNev() {
         return kurzusNev;
     }
@@ -44,6 +49,7 @@ public class Kurzus {
     public Kurzus(String kurzusNev) {
         this.kurzusNev = kurzusNev;
         this.hallgatok=new ArrayList<>();
+        this.dayOfWeek=KurzusokUtils.getInstance().getDayOfTheWeek();
     }
     public Kurzus()
     {

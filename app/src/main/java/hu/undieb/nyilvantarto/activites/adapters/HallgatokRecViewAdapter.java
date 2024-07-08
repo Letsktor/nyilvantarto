@@ -19,6 +19,7 @@ import java.util.List;
 
 import hu.undieb.nyilvantarto.activites.JelenletRog;
 import hu.undieb.nyilvantarto.model.Hallgato;
+import hu.undieb.nyilvantarto.model.Jelenlet;
 import hu.undieb.nyilvantarto.model.KurzusokUtils;
 import hu.undieb.nyilvantarto.R;
 import hu.undieb.nyilvantarto.activites.pop_up_kartyaActivity;
@@ -53,6 +54,11 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             });
             return true;
         });
+        if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.PRESENT || KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER)
+        {
+            holder.check.setAlpha(1.0f);
+        }
+
         if (!hallgatok.get(position).getCardId().equals("") && !hallgatok.get(position).getCardNumber().equals("")) {
 
 
@@ -60,9 +66,10 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             holder.parent.setOnClickListener(v -> {
                 Intent intent = new Intent(holder.parent.getContext(), JelenletRog.class);
                 intent.putExtra("tanulo_nev", holder.txtView.getText().toString());
+                intent.putExtra("pos",position);
                 holder.parent.getContext().startActivity(intent);
             });
-
+            holder.card.setAlpha(1.0f);
         } else {
 
 
@@ -71,7 +78,7 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
                 intent.putExtra("tanulo_nev", holder.txtView.getText().toString());
                 intent.putExtra("hallgato_id", Integer.toString(position));
                 holder.parent.getContext().startActivity(intent);
-                holder.card.setAlpha(1.0f);
+
             });
         }
 
@@ -100,7 +107,9 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
                     kurzus_nev,
                     Integer.toString(position)
             );
+            notifyDataSetChanged();
             dialog.cancel();
+            holder.con.setVisibility(View.GONE);
             view.refreshDrawableState();
         });
     }
@@ -108,7 +117,10 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
     public int getItemCount() {
         return hallgatok.size();
     }
-
+    public void updateData(List<Hallgato> newHallgatok) {
+        this.hallgatok = newHallgatok;
+        notifyDataSetChanged();
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtView;
         ImageView card, check;
