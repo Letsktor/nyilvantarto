@@ -52,6 +52,7 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
         pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
         txtnfc=findViewById(R.id.txtNfc);
         context=getApplicationContext();
+        SharedPreferences sharedPref = getSharedPreferences("KurzusNev", Context.MODE_PRIVATE);
         if(tag!=null)
         {
             Toast.makeText(this,tag.toString(),Toast.LENGTH_LONG).show();
@@ -88,7 +89,7 @@ public class pop_up_kartyaActivity extends AppCompatActivity {
 
                 Intent i=new Intent(this, HallgatokActivity.class);
                 startActivity(i);
-                SharedPreferences sharedPref = getSharedPreferences("KurzusNev", Context.MODE_PRIVATE);
+
                 KurzusokUtils.getInstance().updateHallgato(new Hallgato(text.getText().toString(),txtBArCOdeValue.getText().toString(),txtnfc.getText().toString()),sharedPref.getString("kurzus_nev", null),it.getStringExtra("hallgato_id"));
 
 

@@ -27,6 +27,7 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 import java.util.ArrayList;
 
 import hu.undieb.nyilvantarto.R;
+import hu.undieb.nyilvantarto.model.Hallgato;
 import hu.undieb.nyilvantarto.model.Jelenlet;
 import hu.undieb.nyilvantarto.model.KurzusokUtils;
 import hu.undieb.nyilvantarto.model.Ora;
@@ -57,14 +58,15 @@ public class JelenletRog extends AppCompatActivity {
         String kurzus_nev = sharedPref.getString("kurzus_nev", null);
         pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
         context=getApplicationContext();
+        Intent i=new Intent(this, HallgatokActivity.class);
         button.setOnClickListener(v ->{
             //KurzusokUtils.getInstance().updateJelenlet(kurzus_nev,Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1),position,new Jelenlet(name.getText().toString(), Jelenlet.Status.RECORDEDBYTEACHER));
             ArrayList<Jelenlet> temp=new ArrayList<>();
             temp.addAll(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok());
-            temp.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
+            temp.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.RECORDEDBYTEACHER));
             KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
 
-            Intent i=new Intent(this, HallgatokActivity.class);
+
             startActivity(i);
 
         } );
@@ -87,7 +89,19 @@ public class JelenletRog extends AppCompatActivity {
                                 barcode -> {
                                     String rawValue = barcode.getRawValue();
                                     String[] temp=rawValue.split("/");
-                                    //txtBArCOdeValue.setText(temp[temp.length-1]);
+                                    for(Hallgato hal:KurzusokUtils.getInstance().getHallgatok(kurzus_nev).getValue())
+                                    {
+                                        if(hal.getCardNumber().equals(temp[temp.length-1]))
+                                        {
+                                            ArrayList<Jelenlet> temp1=new ArrayList<>();
+                                            temp1.addAll(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok());
+                                            temp1.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
+                                            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp1),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
+                                            break;
+                                        }
+
+                                    }
+
                                 })
                         .addOnCanceledListener(
                                 () -> {
@@ -97,6 +111,7 @@ public class JelenletRog extends AppCompatActivity {
                                 e -> {
                                     // Task failed with an exception
                                 });
+                startActivity(i);
             }
 
         });
@@ -108,6 +123,10 @@ public class JelenletRog extends AppCompatActivity {
         if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())){
             tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             byte[] serialnuminbytes=tag.getId();
+            SharedPreferences sharedPref = getSharedPreferences("KurzusNev", Context.MODE_PRIVATE);
+            String kurzus_nev = sharedPref.getString("kurzus_nev", null);
+            Intent it=getIntent();
+            int position=it.getIntExtra("pos",0);
             StringBuffer sb=new StringBuffer();
             for(byte b:serialnuminbytes)
             {
@@ -120,9 +139,22 @@ public class JelenletRog extends AppCompatActivity {
                 }
 
             }
+            for(Hallgato hal:KurzusokUtils.getInstance().getHallgatok(kurzus_nev).getValue())
+            {
+                if(sb.toString().equals(hal.getCardId()))
+                {
+                    ArrayList<Jelenlet> temp1=new ArrayList<>();
+                    temp1.addAll(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok());
+                    temp1.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
+                    KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp1),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
+                    break;
+                }
+
+            }
 
         }
-
+        Intent i=new Intent(this, HallgatokActivity.class);
+        startActivity(i);
 
     }
     void ReadModeOn()

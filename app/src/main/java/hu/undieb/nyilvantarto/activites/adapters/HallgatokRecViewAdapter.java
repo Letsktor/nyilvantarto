@@ -50,6 +50,8 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             });
             holder.delete.setOnClickListener(v2 -> {
                 KurzusokUtils.getInstance().removeHallgato(kurzus_nev, Integer.toString(position));
+                hallgatok.remove(position);
+                notifyDataSetChanged();
                 holder.con.setVisibility(View.GONE);
             });
             return true;
