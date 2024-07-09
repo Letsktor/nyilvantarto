@@ -129,4 +129,8 @@ public class KurzusokUtils {
     {
         kDAO.updateJelenlet(kurzusnev,oraid,position,jelenlet);
     }
+    public void removeKurzus(String kurzusnev)
+    {
+        kDAO.removeKurzus(kurzusnev);
+    }
 }

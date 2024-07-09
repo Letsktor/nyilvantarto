@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class FireBaseKurzusDAO implements KurzusDAO{
 
+
     private DatabaseReference database= FirebaseDatabase.getInstance().getReference(FirebaseAuth.getInstance().getUid()).child("Kurzusok");
     @Override
     public void addKurzus(Kurzus kurzus) {
@@ -149,5 +150,9 @@ public class FireBaseKurzusDAO implements KurzusDAO{
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
         String dayOfWeek = dayFormat.format(date);
         return dayOfWeek;
+    }
+    @Override
+    public void removeKurzus(String kurzusnev) {
+       database.child(kurzusnev).removeValue();
     }
 }

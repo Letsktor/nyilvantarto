@@ -94,4 +94,10 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
             textView=itemView.findViewById(R.id.txtKurzus);
         }
     }
+    public String getKurzusName(int position)
+    {   String name=kurzusok.get(position).getKurzusNev();
+        kurzusok.remove(position);
+        return name;
+    }
+
 }

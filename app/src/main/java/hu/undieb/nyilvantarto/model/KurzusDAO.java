@@ -16,4 +16,5 @@ public interface KurzusDAO {
     public void updateOra(String kurzusnev,Ora ora,String oraId);
     public void updateJelenlet(String kurzusnev, String oraid, int position, Jelenlet jelenlet);
     public String getDayOfTheWeek();
+    public void removeKurzus(String kurzusnev);
 }
