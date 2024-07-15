@@ -61,6 +61,10 @@ public class KurzusokRecViewAdapter extends RecyclerView.Adapter<KurzusokRecView
 
             imgStatisztika.setOnClickListener(vo->{
                 Intent intent=new Intent(context, StatisztikaActivity.class);
+                SharedPreferences sharedPreferences=context.getSharedPreferences("KurzusNev",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("kurzus_nev",holder.textView.getText().toString());
+                editor.apply();
                 context.startActivity(intent);
                 dialog.dismiss();
             });
