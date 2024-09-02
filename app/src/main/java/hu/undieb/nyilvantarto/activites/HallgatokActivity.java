@@ -54,7 +54,11 @@ public class HallgatokActivity extends AppCompatActivity {
 
             KurzusokUtils.getInstance().addOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),0));
         }
-            else{
+
+        else if(!KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getDate().equals(KurzusokUtils.getInstance().getCurrentDate())){
+            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),0),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()));
+        }
+        else{
                 temp=KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size() - 1).getJelenlevok();
                 for(Jelenlet jel:temp) {
                     if(jel.getStatus()== Jelenlet.Status.PRESENT || jel.getStatus()== Jelenlet.Status.RECORDEDBYTEACHER){
