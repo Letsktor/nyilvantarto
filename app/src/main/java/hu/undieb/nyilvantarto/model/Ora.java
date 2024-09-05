@@ -56,7 +56,7 @@ public class Ora {
     public String toString() {
         return "Ora{" +
                 "date=" + date +
-                ", hianyzok=" + jelenlevok +
+                ", jelenlevok=" + jelenlevok +
                 '}';
     }
 }

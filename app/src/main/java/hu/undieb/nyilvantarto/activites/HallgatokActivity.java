@@ -57,14 +57,24 @@ public class HallgatokActivity extends AppCompatActivity {
 
         else if(!KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getDate().equals(KurzusokUtils.getInstance().getCurrentDate())){
             KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),0),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()));
+            ArrayList<Hallgato> ha=new ArrayList<>();
+            ha.addAll(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getHallgatok());
+            for (Hallgato h:ha) {
+                temp.add(new Jelenlet(h.getName()));
+            }
+            KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).setJelenlevok(temp);
+
         }
         else{
                 temp=KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size() - 1).getJelenlevok();
+                Log.d("TEMP",temp.toString());
                 for(Jelenlet jel:temp) {
                     if(jel.getStatus()== Jelenlet.Status.PRESENT || jel.getStatus()== Jelenlet.Status.RECORDEDBYTEACHER){
                         jelszam+=1;
+
                     }
                 }
+            KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).setJelenlevok(temp);
             }
         KurzusokUtils.getInstance().getHallgatok(kurzus_nev).observe(this,h->{
             if(h!=null)

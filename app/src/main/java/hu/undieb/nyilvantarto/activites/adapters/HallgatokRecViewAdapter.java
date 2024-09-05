@@ -1,6 +1,7 @@
 package hu.undieb.nyilvantarto.activites.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,13 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             });
             return true;
         });
+        Log.d("JKBNFBSBFS",KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus().toString());
         if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.PRESENT || KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER)
         {
             holder.check.setAlpha(1.0f);
+        }
+        else{
+            holder.check.setAlpha(0.5f);
         }
 
         if (!hallgatok.get(position).getCardId().equals("") && !hallgatok.get(position).getCardNumber().equals("")) {

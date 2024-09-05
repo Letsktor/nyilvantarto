@@ -71,7 +71,7 @@ public class JelenletRog extends AppCompatActivity {
                 temp.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.RECORDEDBYTEACHER));
             }
 
-            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
+            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok_szama()+1,temp),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
 
 
             startActivity(i);
@@ -110,7 +110,7 @@ public class JelenletRog extends AppCompatActivity {
                                                 temp1.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
                                             }
                                             temp1.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
-                                            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp1),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
+                                            KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok_szama()+1,temp1),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
                                             break;
                                         }
 
@@ -167,7 +167,7 @@ public class JelenletRog extends AppCompatActivity {
                         temp1.set(position,new Jelenlet(name.getText().toString(), Jelenlet.Status.PRESENT));
                     }
 
-                    KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size(),temp1),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
+                    KurzusokUtils.getInstance().updateOra(kurzus_nev,new Ora(KurzusokUtils.getInstance().getCurrentDate(),KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok_szama()+1,temp1),Integer.toString(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1));
                     break;
                 }
 

@@ -2,6 +2,7 @@ package hu.undieb.nyilvantarto.activites.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,10 @@ public class StatisztikaRecViewAdapter  extends RecyclerView.Adapter<Statisztika
 
     @Override
     public void onBindViewHolder(@NonNull StatisztikaRecViewAdapter.ViewHolder holder, int position) {
+        Log.d("ORAK",orak.toString());
         holder.txtDatumView.setText(orak.get(position).getDate().substring(5));
-        holder.txtJelenlevok.setText(String.valueOf(orak.get(position).getJelenlevok_szama()));
+        holder.txtJelenlevok.setText(Integer.toString(orak.get(position).getJelenlevok_szama()));
+        Log.d("LUL",holder.txtJelenlevok.getText().toString());
         holder.parent.setOnClickListener(v->{
             Intent intent=new Intent(mContext, JelenletActivity.class);
             mContext.startActivity(intent);
