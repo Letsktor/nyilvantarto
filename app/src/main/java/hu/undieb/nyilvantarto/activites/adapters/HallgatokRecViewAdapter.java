@@ -57,14 +57,14 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             });
             return true;
         });
-        Log.d("JKBNFBSBFS",KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus().toString());
-        if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.PRESENT || KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER)
+        //Log.d("JKBNFBSBFS",KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus().toString());
+        /*if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.PRESENT || KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER)
         {
             holder.check.setAlpha(1.0f);
         }
         else{
             holder.check.setAlpha(0.5f);
-        }
+        }*/
 
         if (!hallgatok.get(position).getCardId().equals("") && !hallgatok.get(position).getCardNumber().equals("")) {
 
