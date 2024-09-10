@@ -58,23 +58,34 @@ public class HallgatokRecViewAdapter extends RecyclerView.Adapter<HallgatokRecVi
             return true;
         });
         //Log.d("JKBNFBSBFS",KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus().toString());
-        /*if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.PRESENT || KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER)
+        try{
+            if(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.PRESENT || KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().get(KurzusokUtils.getInstance().getKurzus(kurzus_nev).getOrak().size()-1).getJelenlevok().get(position).getStatus()== Jelenlet.Status.RECORDEDBYTEACHER)
+            {
+                holder.check.setAlpha(1.0f);
+            }
+            else{
+                holder.check.setAlpha(0.5f);
+            }
+        }catch (Exception e)
         {
-            holder.check.setAlpha(1.0f);
-        }
-        else{
             holder.check.setAlpha(0.5f);
-        }*/
+        }
+
 
         if (!hallgatok.get(position).getCardId().equals("") && !hallgatok.get(position).getCardNumber().equals("")) {
 
 
             holder.card.setAlpha(1.0f);
             holder.parent.setOnClickListener(v -> {
-                Intent intent = new Intent(holder.parent.getContext(), JelenletRog.class);
-                intent.putExtra("tanulo_nev", holder.txtView.getText().toString());
-                intent.putExtra("pos",position);
-                holder.parent.getContext().startActivity(intent);
+                if(holder.check.getAlpha()!=1.0f)
+                {
+                    Intent intent = new Intent(holder.parent.getContext(), JelenletRog.class);
+                    intent.putExtra("tanulo_nev", holder.txtView.getText().toString());
+                    intent.putExtra("pos",position);
+                    holder.parent.getContext().startActivity(intent);
+                    holder.card.setAlpha(1.0f);
+                }
+
             });
             holder.card.setAlpha(1.0f);
         } else {
